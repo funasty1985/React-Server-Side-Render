@@ -1,11 +1,11 @@
 const express = require('express');
 const React = require('react');
-const rendertoString = require('react-dom/server').rendertoString; 
+const renderToString = require('react-dom/server').renderToString; 
 const Home = require('./client/components/Home').default; 
 const app = express();
 
 app.get('/', (req,res)=>{
-    const content = rendertoString(<Home />); 
+    const content = renderToString(<Home />); 
     res.send(content);
 });
 

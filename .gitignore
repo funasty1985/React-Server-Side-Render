@@ -1,2 +1,5 @@
 # Dependency directories
 server/node_modules/
+
+# build folder 
+build 
