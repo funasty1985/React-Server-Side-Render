@@ -1,6 +1,8 @@
 const path = require('path');
+const merge = require('webpack-merge');
+const baseConfig = require('./webpack.base.js')
 
-module.exports = {
+const config = {
     // Inform webpack that we're building a bundle 
     // for nodeJS, rather than for the browser
 
@@ -16,24 +18,6 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')
     },
-
-    // Tell webpack to run babel on every file it runs through
-    // ie all es20XX file will convert to es6
-    module:{
-        rules: [
-            {
-                test: /\.js?/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                options:{ 
-                    presets: [
-                        'react',    // turn JSX to normal function call 
-                        'stage-0',  // for async call 
-                        ['env', { targets: { browsers: ['last 2 versions'] }}]   // master preset, run all the transcend rules 
-                                                                                 // to meet the requirement for the latest 2 versions of all popular browser    
-                    ]
-                }
-            }
-        ]
-    }
 };
+
+module.exports = merge(baseConfig, config)
