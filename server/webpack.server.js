@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base.js')
+const baseConfig = require('./webpack.base.js');
+const webpackNodeExternals = require('webpack-node-externals');
 
 const config = {
     // Inform webpack that we're building a bundle 
@@ -18,6 +19,9 @@ const config = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')
     },
+
+    // telling webpack not to bundle any library inside node_modules folder 
+    externals: [webpackNodeExternals()]
 };
 
 module.exports = merge(baseConfig, config)
