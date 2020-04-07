@@ -11,7 +11,7 @@ import Routes from './Routes';
 import reducers from './reducers';
 import { renderRoutes } from 'react-router-config';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));  // second args of creatStore is the inital state
+const store = createStore(reducers, window.INITAL_STATE, applyMiddleware(thunk));  // second args of creatStore is the inital state
 
 // ReactDOM.render(<Home />, document.querySelector('#root'));
 ReactDOM.hydrate(

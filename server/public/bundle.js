@@ -9040,7 +9040,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Startup point for the client side application 
 // bootup location of the app in the browser 
-var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default)); // second args of creatStore is the inital state
+var store = (0, _redux.createStore)(_reducers2.default, window.INITAL_STATE, (0, _redux.applyMiddleware)(_reduxThunk2.default)); // second args of creatStore is the inital state
 
 // ReactDOM.render(<Home />, document.querySelector('#root'));
 _reactDom2.default.hydrate(_react2.default.createElement(
