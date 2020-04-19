@@ -1,16 +1,23 @@
 import 'babel-polyfill';
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
+import proxy from 'express-http-proxy';
 import Routes from './client/Routes';
 import renderer from './helpers/renderer'
 import createstore from './helpers/createStore';
 
 const app = express()
 
-app.use(express.static('public'))
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
+    proxyReqOptDecorator(opts){
+        opts.headers['x-forwarded-host'] = 'localhost:3000'
+        return opts;   // for goole oauth flow
+    }
+}))
 
+app.use(express.static('public'))
 app.get('*', (req,res)=>{
-    const store = createstore();
+    const store = createstore(req);
 
     // matchRoutes check which component the incoming 
     // req.path want to render insider our app 

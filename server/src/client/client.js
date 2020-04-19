@@ -10,8 +10,17 @@ import { Provider } from 'react-redux';
 import Routes from './Routes';
 import reducers from './reducers';
 import { renderRoutes } from 'react-router-config';
+import axios from 'axios';
 
-const store = createStore(reducers, window.INITAL_STATE, applyMiddleware(thunk));  // second args of creatStore is the inital state
+// axiosInstance.get('/users')  -->  getting /api/user (go to proxy)
+const axiosInstance = axios.create({
+    baseURL: '/api'
+});
+
+const store = createStore(
+    reducers, 
+    window.INITAL_STATE,        // second args of creatStore is the inital state
+    applyMiddleware(thunk.withExtraArgument(axiosInstance)));    
 
 // ReactDOM.render(<Home />, document.querySelector('#root'));
 ReactDOM.hydrate(
