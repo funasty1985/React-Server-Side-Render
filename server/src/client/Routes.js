@@ -1,6 +1,7 @@
 // route map 
 import React from 'react';
 // import { Route } from 'react-router-dom';
+import App from './App';
 import HomePage from './pages/HomePage';
 import UsersListPage from './pages/UserListPage'
 
@@ -15,12 +16,17 @@ import UsersListPage from './pages/UserListPage'
 
 export default [
     {
-        ...HomePage,
-        path: '/',
-        exact:true
-    },
-    {
-        ...UsersListPage,
-        path: '/users'
+        ...App,  // no path means the component will be shown in every page
+        routes: [
+            {
+                ...HomePage,
+                path: '/',
+                exact:true
+            },
+            {
+                ...UsersListPage,
+                path: '/users'
+            }
+        ]
     }
 ];

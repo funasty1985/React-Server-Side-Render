@@ -10,13 +10,17 @@ const app = express()
 
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
     proxyReqOptDecorator(opts){
-        opts.headers['x-forwarded-host'] = 'localhost:3000'
-        return opts;   // for goole oauth flow
+        opts.headers['x-forwarded-host'] = 'localhost:3000'    
+        return opts;   
+        // by default, the app wil be redirected to http://react-ssr-api.herokuapp.com
+        // after google oauth login . x-forwarded-host is set (to localhost:3000)so that   
+        // the app to redirect to localhost:3000 instead .  
     }
 }))
 
 app.use(express.static('public'))
 app.get('*', (req,res)=>{
+    
     const store = createstore(req);
 
     // matchRoutes check which component the incoming 
