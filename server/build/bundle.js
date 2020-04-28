@@ -677,7 +677,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (req) {
     var axiosInstance = _axios2.default.create({
         baseURL: 'http://react-ssr-api.herokuapp.com',
-        headers: { cookies: req.get('cookie') || '' }
+        headers: { cookie: req.get('cookie') || '' }
     });
 
     var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));
