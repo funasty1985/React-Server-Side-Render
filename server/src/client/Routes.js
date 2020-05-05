@@ -3,7 +3,9 @@ import React from 'react';
 // import { Route } from 'react-router-dom';
 import App from './App';
 import HomePage from './pages/HomePage';
-import UsersListPage from './pages/UserListPage'
+import UsersListPage from './pages/UserListPage';
+import NotFoundPage from './pages/NotFoundPage';
+import AdminsListPage from './pages/AdminsListPage';
 
 // export default () => {
 //     return (
@@ -26,6 +28,13 @@ export default [
             {
                 ...UsersListPage,
                 path: '/users'
+            },
+            {
+                ...AdminsListPage,
+                path: '/admins'
+            },
+            {
+                ...NotFoundPage,
             }
         ]
     }

@@ -6,10 +6,12 @@ import { renderRoutes } from 'react-router-config';
 import Routes from '../client/Routes'; // it is now an Array but not a component 
 import serialize from 'serialize-javascript';
 
-export default (req, store) => {
+export default (req, store, context) => {
     const content = renderToString(
         <Provider store={store}>
-            <StaticRouter context={{}} location={req.path}>
+            {/* context will be passed down to every child component of StaticRouter as an attribute of props*/}
+            {/* for StaticRouter, the passed context to be renamed to props.staticContext in the child component */}
+            <StaticRouter context={context} location={req.path}>  
                 {/* <Routes /> */}
                 <div>{renderRoutes(Routes)}</div>   
                 {/* renderoutes() takes in the config array and turn it to a route component similar to <Routes> */}
