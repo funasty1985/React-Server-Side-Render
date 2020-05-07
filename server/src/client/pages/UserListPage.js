@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
+import { Helmet } from 'react-helmet';
 
 class UsersList extends Component {
     componentDidMount() {
@@ -13,9 +14,22 @@ class UsersList extends Component {
         })
     }
 
+    head(){
+        return(
+            // Helmet expects a string as a child of <title> , 
+            // so we wrap the elements we want to display 
+            // into one single string expression
+            <Helmet>
+                    <title>{`${this.props.users.length} Users Loaded`}</title>  
+                    <meta property='og:title' content='Users App'/>
+            </Helmet>
+        );
+    }
+
     render(){ 
         return(
             <div>
+                {this.head()}
                 Here's a big list of users:
                 <ul>{this.renderUsers()}</ul>
             </div>
