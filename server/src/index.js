@@ -30,13 +30,30 @@ app.get('*', (req,res)=>{
         return route.loadData ? 
                 route.loadData(store) : // we will load the data we want into the store. 
                 null;  // not every component has loadDate()
+    })
+    .map(promise => {
+        if(promise){
+            return new Promise((resolve, reject) => {
+                promise.then(resolve).catch(resolve);
+            });
+        };
     });  
+    // the second map func above is a hack to the promises list
+    // which resolves each promise , 
+    // ie route.loadData(store),  even if it is rejected by any reason 
+    // so that Promise all below always function well.
     
     Promise.all(promises).then(()=> {
         const context = {};
         const content = renderer(req, store, context);
 
-        if (context.notFound) {
+        // context will record a redirect url if <Redirect/> is rendered
+        console.log('context ',context)
+        if(context.url){
+            return res.redirect(301, context.url)
+        }
+
+        if (context.notFound){
             res.status(404)
         }
         res.send(content);  
